@@ -4,6 +4,7 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.XYSeries;
@@ -12,21 +13,22 @@ import org.jfree.data.xy.XYSeriesCollection;
 import javax.swing.*;
 import java.awt.*;
 
-public class JFreeChartExample extends JFrame {
-    private XYSeries dataSeries;
+public class JFreeChartExample extends JPanel {
+    public static XYSeries dataSeries;
 
     public JFreeChartExample() {
-        super("JFreeChart Example");
+
 
         // Create a new XYSeries to hold the data
         dataSeries = new XYSeries("Data");
 
         // Add some sample data to the series
-        dataSeries.add(1.0, 1.0);
+        dataSeries.add(440.0, -2.27);
         dataSeries.add(2.0, 3.0);
-        dataSeries.add(3.0, 2.0);
-        dataSeries.add(4.0, 4.0);
-        dataSeries.add(5.0, 3.5);
+       dataSeries.add(3.0, 2.0);
+       dataSeries.add(4.0, 4.0);
+//        dataSeries.add(5.0, 3.5);
+
 
         // Create a new XYSeriesCollection to hold the series
         XYSeriesCollection dataset = new XYSeriesCollection();
@@ -35,8 +37,8 @@ public class JFreeChartExample extends JFrame {
         // Create the chart using the dataset
         JFreeChart chart = ChartFactory.createXYLineChart(
                 "Current vs battery voltage", // Chart title
-                "Voltage", // X-axis label
-                "Current", // Y-axis label
+                "Wavelength(nm)", // X-axis label
+                "Energy in (ev)", // Y-axis label
                 dataset, // Dataset
                 PlotOrientation.VERTICAL, // Plot orientation
                 true, // Show legend
@@ -48,8 +50,9 @@ public class JFreeChartExample extends JFrame {
         NumberAxis yAxis = (NumberAxis) plot.getRangeAxis();
 
 
-        xAxis.setRange(-8.0, 8.0);
-        yAxis.setRange(0.0, 10.0);
+        xAxis.setRange(0.0, 1000.0);
+        xAxis.setTickUnit(new NumberTickUnit(100));
+        yAxis.setRange(-5.0, 10);
         plot.setDomainCrosshairVisible(true);
         plot.setDomainCrosshairLockedOnData(true);
         plot.setDomainCrosshairValue(0.0);
@@ -62,17 +65,15 @@ public class JFreeChartExample extends JFrame {
 
         // Create a new ChartPanel to display the chart
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(500, 300));
+        chartPanel.setPreferredSize(new Dimension(300, 400));
 
         // Add the chart panel to the frame
         add(chartPanel);
 
         // Set the size and visibility of the frame
-        setSize(600, 400);
+        setSize(400, 400);
         setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new JFreeChartExample();
-    }
+
 }

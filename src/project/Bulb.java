@@ -41,7 +41,7 @@ Color col;
 
         Wavelength wl = new Wavelength();
          col = wl.getColorForWavelength(wavelength,intensity);
-
+        System.out.println(col+"coplor");
         int width = beam.getWidth();
         int height = beam.getHeight();
         WritableRaster raster = beam.getRaster();

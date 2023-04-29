@@ -2,9 +2,11 @@ package project;
 
 import java.awt.*;
 
+import static project.Variables.isStart;
+
 public class Wavelength {
 
-    public Color getColorForWavelength(int wavelength, double intesity) {
+    public Color getColorForWavelength(int wavelength, double intensity) {
         int red, green, blue;
         if (wavelength >= 400 && wavelength < 440) {
             red = (int) ((440 - wavelength) * 255 / 40);
@@ -35,9 +37,12 @@ public class Wavelength {
             green = 0;
             blue = 0;
         }
-            red = (int)Math.round(red*intesity);
-            green = (int)   Math.round(green*intesity);
-            blue= (int) Math.round(blue*intesity);
+        System.out.println(wavelength+"in color");
+        System.out.println(intensity+"in wl");
+            red = (int)Math.round(red*intensity);
+            green = (int)   Math.round(green*intensity);
+            blue= (int) Math.round(blue*intensity);
+
 return new Color(red ,green, blue);
     }
 
